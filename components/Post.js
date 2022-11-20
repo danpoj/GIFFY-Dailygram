@@ -17,7 +17,8 @@ export default function Post({ post }) {
         loading='lazy'
         onLoadingComplete={() => setIsLoading(false)}
       />
-      <p className='border-b border-stone-300 p-3'>{post.title}</p>
+      {/* <p className='border-b border-stone-300 p-3'>
+      </p> */}
     </div>
   )
 }

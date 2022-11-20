@@ -1,0 +1,43 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  name         String
+  email        String    @unique
+  image        String    @db.VarChar(500)
+  createdAt    DateTime  @default(now())
+  writtenPosts Post[]    @relation("writtenPosts")
+  LikedPosts   Post[]    @relation("LikedPosts")
+  comments     Comment[]
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  title     String    @db.VarChar(80)
+  text      String    @db.VarChar(800)
+  author    User      @relation("writtenPosts", fields: [authorId], references: [id])
+  authorId  Int
+  LikedBy   User?     @relation("LikedPosts", fields: [LikedById], references: [id])
+  LikedById Int?
+  createdAt DateTime  @default(now())
+  Comment   Comment[]
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  text      String   @db.VarChar(300)
+  createdAt DateTime @default(now())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  Int
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    Int
+}

@@ -49,7 +49,7 @@ export default function LandingPage() {
 
         <div className='h-32 overflow-hidden relative w-full group cursor-pointer md:h-auto md:aspect-square'>
           <span className='absolute inset-0 flex items-center justify-center text-xl font-bold z-10 text-white'>
-            댓글 순
+            좋아요 순
           </span>
           <Image
             className='opacity-70 object-cover group-hover:scale-125 group-hover:opacity-100 transition'
