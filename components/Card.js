@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export default function Card({ text, img }) {
   return (
     <div className='h-32 overflow-hidden relative'>
