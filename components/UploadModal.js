@@ -16,6 +16,7 @@ export default function UploadModal({ isUploadModal, setIsUploadModal }) {
   const [loading, setLoading] = useState(false)
   const [selected, setSelected] = useRecoilState(selectedGIF)
   const { data: session } = useSession()
+
   const onSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)

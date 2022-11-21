@@ -6,7 +6,7 @@ import LandingPage from '../components/LandingPage'
 const Home = () => {
   const [posts, setPosts] = useState([])
 
-  const getAllPosts = async () => {
+  const getPosts = async () => {
     const res = await fetch('/api/posts', {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
@@ -17,8 +17,10 @@ const Home = () => {
   }
 
   useEffect(() => {
-    getAllPosts()
+    getPosts()
   }, [])
+
+  // console.log(posts)
 
   return (
     <div className='px-1'>
@@ -27,7 +29,7 @@ const Home = () => {
 
       {/* HEADER */}
       <h1 className='text-4xl uppercase font-bold mt-32 mb-10 text-center text-stone-700'>
-        ALL POSTS 🔥
+        ALL POSTS
       </h1>
 
       {/* POSTS */}

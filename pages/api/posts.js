@@ -30,6 +30,7 @@ export default async function posts(req, res) {
       orderBy: {
         createdAt: 'desc',
       },
+
       include: {
         author: {
           select: {

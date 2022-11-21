@@ -7,6 +7,7 @@ import { useSession, signOut } from 'next-auth/react'
 import UploadModal from './UploadModal'
 import { MdOutlinePersonAddAlt } from 'react-icons/md'
 import { CgLogOut } from 'react-icons/cg'
+import Link from 'next/link'
 
 export default function LandingPage() {
   const [isLoginModal, setIsLoginModal] = useState(false)
@@ -106,6 +107,22 @@ export default function LandingPage() {
               <div>{session.user.email}</div>
               <div className='font-bold'>{session.user.name}</div>
             </div>
+
+            <div className='flex flex-col gap-2 mx-2'>
+              <Link
+                href='/my-posts'
+                className='border border-black p-2 w-20 hover:bg-slate-600 hover:text-slate-100 transition duration-100'
+              >
+                내 게시글
+              </Link>
+              <Link
+                href='#'
+                className='border border-black p-2 w-20 hover:bg-slate-600 hover:text-slate-100 transition duration-100'
+              >
+                내 댓글
+              </Link>
+            </div>
+
             <button
               className=' text-rose-600 underline flex ml-4 md:ml-0 md:mt-3'
               onClick={() => signOut()}
