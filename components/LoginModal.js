@@ -3,7 +3,6 @@ import { SiNaver, SiGithub } from 'react-icons/si'
 import { FcGoogle } from 'react-icons/fc'
 import { RiKakaoTalkFill } from 'react-icons/ri'
 import Image from 'next/image'
-import { useSession, signIn, signOut } from 'next-auth/react'
 
 export default function LoginModal({ isLoginModal, setIsLoginModal }) {
   if (!isLoginModal) return null

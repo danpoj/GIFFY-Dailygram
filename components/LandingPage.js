@@ -1,11 +1,9 @@
-import Button from './Button'
 import { IoIosArrowDown } from 'react-icons/io'
 import { TbSquarePlus } from 'react-icons/tb'
 import Image from 'next/image'
-import Card from './Card'
 import LoginModal from './LoginModal'
-import { useState } from 'react'
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { useEffect, useState } from 'react'
+import { useSession, signOut } from 'next-auth/react'
 import UploadModal from './UploadModal'
 import { MdOutlinePersonAddAlt } from 'react-icons/md'
 import { CgLogOut } from 'react-icons/cg'
@@ -13,7 +11,21 @@ import { CgLogOut } from 'react-icons/cg'
 export default function LandingPage() {
   const [isLoginModal, setIsLoginModal] = useState(false)
   const [isUploadModal, setIsUploadModal] = useState(false)
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
+
+  const userCheck = async () => {
+    await fetch('/api/signUp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(session.user),
+    })
+  }
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      userCheck()
+    }
+  }, [status])
 
   const onLoginBtnClick = () => {
     if (session) return
@@ -27,7 +39,6 @@ export default function LandingPage() {
     } else {
       setIsUploadModal(true)
     }
-    console.log(session)
   }
 
   return (

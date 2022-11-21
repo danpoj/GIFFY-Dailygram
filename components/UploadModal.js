@@ -3,15 +3,19 @@ import Image from 'next/image'
 import GifCard from './GifCard'
 import Error from 'next/error'
 import { useState } from 'react'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { selectedGIF } from '../atoms/selectedGIF'
+import { useSession } from 'next-auth/react'
 
 const BASE_URL = 'https://api.giphy.com/v1/gifs/search'
 
 export default function UploadModal({ isUploadModal, setIsUploadModal }) {
+  const [title, setTitle] = useState('')
+  const [text, setText] = useState('')
   const [searched, setSearched] = useState([])
   const [loading, setLoading] = useState(false)
-  const selected = useRecoilValue(selectedGIF)
+  const [selected, setSelected] = useRecoilState(selectedGIF)
+  const { data: session } = useSession()
   const onSubmit = async (e) => {
     e.preventDefault()
     setLoading(true)
@@ -28,7 +32,28 @@ export default function UploadModal({ isUploadModal, setIsUploadModal }) {
     throw new Error('??')
   }
 
-  // console.log(selected)
+  const addPost = async (e) => {
+    const res = await fetch('/api/posts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: session.user.email,
+        title,
+        text,
+        gifData: {
+          src: selected.images.original.webp,
+          width: parseInt(selected.images.original.width),
+          height: parseInt(selected.images.original.height),
+        },
+      }),
+    })
+
+    setTitle('')
+    setText('')
+    setSearched([])
+    setSelected(null)
+    setIsUploadModal(false)
+  }
 
   const onClick = (e) => {
     if (e.target.id === 'upload-modal') setIsUploadModal(false)
@@ -44,21 +69,33 @@ export default function UploadModal({ isUploadModal, setIsUploadModal }) {
     >
       {/* after select GIF */}
       {selected !== null ? (
-        <div className='h-[80%] w-[60%] flex flex-col items-center justify-center gap-2'>
+        <div className='h-[80%] w-[60%] md:w-[50%] lg:w-[40%] xl:w-[30%] flex flex-col items-center justify-center gap-2 overflow-y-scroll'>
           <Image
-            className='w-[60%]'
+            className='w-[80%]'
             src={selected.images.original.webp}
             width={selected.images.original.width}
             height={selected.images.original.height}
             alt='gif'
           />
-          <form className='flex flex-col w-[60%] gap-1 font-bold text-lg'>
-            <input className='pl-3 h-12' type='text' placeholder='제목' />
+          <form
+            onSubmit={addPost}
+            className='flex flex-col w-[80%]  gap-1 font-bold text-lg'
+          >
+            <input
+              onChange={(e) => setTitle(e.target.value)}
+              className='pl-3 h-12'
+              type='text'
+              placeholder='제목'
+              value={title}
+            />
             <textarea
+              onChange={(e) => setText(e.target.value)}
+              value={text}
               className='pl-3 pt-2'
               type='textarea'
               placeholder='내용'
             />
+            <button className='bg-white'>게시</button>
           </form>
         </div>
       ) : (
