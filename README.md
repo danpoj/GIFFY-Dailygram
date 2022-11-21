@@ -8,3 +8,14 @@
 - **Deploy**: <a href="https://vercel.com/" target="_blank" rel="noreferrer">Verccel</a>
 - **OAuth**: <a href="https://next-auth.js.org/" target="_blank" rel="noreferrer">Next Auth</a>
 - **Design**: <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer">Tailwind CSS</a>
+
+## Todos
+
+- refactoring
+- post modal
+- post likes
+- post comment
+- my comments page
+- my liked post page
+- delete post
+- delete comment
