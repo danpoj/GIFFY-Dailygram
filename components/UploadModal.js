@@ -145,7 +145,7 @@ export default function UploadModal({ isUploadModal, setIsUploadModal }) {
             <div className='w-full overflow-y-scroll pl-1 pr-3'>
               {searched === [] ? null : (
                 <ResponsiveMasonry
-                  columnsCountBreakPoints={{ 0: 1, 380: 2, 700: 3, 1100: 4 }}
+                  columnsCountBreakPoints={{ 0: 2, 700: 3, 1100: 4 }}
                 >
                   <Masonry gutter='0.2rem'>
                     {searched.map((gif) => (
