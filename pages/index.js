@@ -34,15 +34,8 @@ const Home = () => {
       {/* POSTS */}
       {posts.length === 0 ? (
         <div className='w-screen flex justify-center'>
-           <p className='text-lg text-stone-600'>Loading ...</p>
-          <Image
-            className='w-full'
-            src='/nyan.gif'
-            alt='loading'
-            width={300}
-            height={100}
-          />
-         
+          <p className='text-lg text-stone-600'>Loading ...</p>
+          <Image src='/nyan.gif' alt='loading' width={260} height={100} />
         </div>
       ) : (
         <ResponsiveMasonry
