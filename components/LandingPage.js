@@ -95,7 +95,7 @@ export default function LandingPage() {
         </div>
 
         {session ? (
-          <div className='h-32 group md:h-auto md:aspect-square border flex items-center justify-center gap-2 border-stone-800 text-xs md:px-4 md:flex-col md:text-center'>
+          <div className='h-32 pl-2 group md:h-auto md:aspect-square border flex items-center justify-center gap-2 border-stone-800 text-xs md:px-4 md:flex-col md:text-center'>
             <Image
               className='rounded-full w-[36px] h-[36px] object-cover'
               src={session.user.image}
@@ -106,30 +106,29 @@ export default function LandingPage() {
             <div>
               <div>{session.user.email}</div>
               <div className='font-bold'>{session.user.name}</div>
+              <button
+                className=' text-rose-600 underline flex mt-1'
+                onClick={() => signOut()}
+              >
+                <CgLogOut className='' />
+                <span>로그아웃</span>
+              </button>
             </div>
 
             <div className='flex flex-col gap-2 mx-2'>
               <Link
                 href='/my-posts'
-                className='border border-black p-2 w-20 hover:bg-slate-600 hover:text-slate-100 transition duration-100'
+                className='border border-black p-2 w-20 hover:bg-slate-600 hover:text-slate-100 transition duration-100 text-center'
               >
                 내 게시글
               </Link>
               <Link
                 href='#'
-                className='border border-black p-2 w-20 hover:bg-slate-600 hover:text-slate-100 transition duration-100'
+                className='border border-black p-2 w-20 hover:bg-slate-600 hover:text-slate-100 transition duration-100 text-center'
               >
                 내 댓글
               </Link>
             </div>
-
-            <button
-              className=' text-rose-600 underline flex ml-4 md:ml-0 md:mt-3'
-              onClick={() => signOut()}
-            >
-              <CgLogOut className='' />
-              <span>로그아웃</span>
-            </button>
           </div>
         ) : (
           <div
