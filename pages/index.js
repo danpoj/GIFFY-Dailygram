@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 import Post from '../components/Post'
 import LandingPage from '../components/LandingPage'
+import Image from 'next/image'
 
 const Home = () => {
   const [posts, setPosts] = useState([])
@@ -20,8 +21,6 @@ const Home = () => {
     getPosts()
   }, [])
 
-  // console.log(posts)
-
   return (
     <div className='px-1'>
       {/* UPLOAD, LOGIN */}
@@ -33,15 +32,29 @@ const Home = () => {
       </h1>
 
       {/* POSTS */}
-      <ResponsiveMasonry
-        columnsCountBreakPoints={{ 0: 1, 400: 2, 780: 3, 1000: 4, 1200: 5 }}
-      >
-        <Masonry gutter='0.3rem'>
-          {posts.map((post) => (
-            <Post key={post.id} post={post} />
-          ))}
-        </Masonry>
-      </ResponsiveMasonry>
+      {posts.length === 0 ? (
+        <div className='w-screen flex justify-center'>
+           <p className='text-lg text-stone-600'>Loading ...</p>
+          <Image
+            className='w-full'
+            src='/nyan.gif'
+            alt='loading'
+            width={300}
+            height={100}
+          />
+         
+        </div>
+      ) : (
+        <ResponsiveMasonry
+          columnsCountBreakPoints={{ 0: 1, 400: 2, 780: 3, 1000: 4, 1200: 5 }}
+        >
+          <Masonry gutter='0.3rem'>
+            {posts.map((post) => (
+              <Post key={post.id} post={post} />
+            ))}
+          </Masonry>
+        </ResponsiveMasonry>
+      )}
     </div>
   )
 }
