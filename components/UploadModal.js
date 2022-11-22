@@ -70,9 +70,16 @@ export default function UploadModal({ isUploadModal, setIsUploadModal }) {
     >
       {/* after select GIF */}
       {selected !== null ? (
-        <div className='h-[80%] w-[60%] md:w-[50%] lg:w-[40%] xl:w-[30%] flex flex-col items-center justify-center gap-2 overflow-y-scroll'>
+        <div className='h-[80%] w-[80%] sm:w-[70%] md:w-[60%] lg:w-[40%] xl:w-[30%] flex flex-col items-center justify-center gap-1 overflow-y-scroll'>
+          <button
+            onClick={() => setSelected(null)}
+            className=' text-stone-700 py-2 px-4 flex items-center gap-2 bg-white w-[80%] justify-center hover:text-stone-50 hover:bg-stone-700 transition duration-100'
+          >
+            <span className='text-xl'>&#8592; </span>
+            <span className='text-sm font-bold'>뒤로 가기</span>
+          </button>
           <Image
-            className='w-[80%]'
+            className='max-h-[44%] max-w-[80%] object-contain bg-black'
             src={selected.images.original.webp}
             width={selected.images.original.width}
             height={selected.images.original.height}
@@ -92,29 +99,41 @@ export default function UploadModal({ isUploadModal, setIsUploadModal }) {
             <textarea
               onChange={(e) => setText(e.target.value)}
               value={text}
-              className='pl-3 pt-2'
+              className='pl-3 text-base pt-2 h-20'
               type='textarea'
               placeholder='내용'
             />
-            <button className='bg-white'>게시</button>
+            <button className='text-stone-700 w-full bg-white hover:text-stone-50 hover:bg-stone-700 transition duration-100 text-base py-3'>
+              게시
+            </button>
           </form>
         </div>
       ) : (
-        <div className='flex flex-col items-center gap-4 h-[80%] w-[60%]'>
-          {/* search input */}
-          <form onSubmit={onSubmit} className='flex'>
-            <input
-              className='h-12 w-full md:w-52 lg:w-60 rounded-l-xl border border-r-0 border-stone-400 pl-4 text-lg font-bold'
-              placeholder='지브리...'
-              type='text'
-            />
+        <div className='flex flex-col items-center gap-4 h-[70%] md:h-[80%] w-[84%] '>
+          <div className='flex justify-center gap-4 px-4'>
+            {/* search input */}
+            <form onSubmit={onSubmit} className='flex'>
+              <input
+                className='h-12 w-full md:w-52 lg:w-60 rounded-l-xl border border-r-0 border-stone-400 pl-4 text-lg font-bold'
+                placeholder='지브리...'
+                type='text'
+              />
+              <button
+                className='bg-slate-200 h-12 w-16 text-xl border rounded-r-xl border-stone-400'
+                type='submit'
+              >
+                🔍
+              </button>
+            </form>
+
+            {/* x button */}
             <button
-              className='bg-slate-200 h-12 w-16 text-xl border rounded-r-xl border-stone-400'
-              type='submit'
+              onClick={() => setIsUploadModal(false)}
+              className=' text-3xl font-extrabold text-white hover:text-rose-400'
             >
-              🔍
+              &#10005;
             </button>
-          </form>
+          </div>
 
           {/* images */}
           {loading ? (
@@ -126,7 +145,7 @@ export default function UploadModal({ isUploadModal, setIsUploadModal }) {
             <div className='w-full overflow-y-scroll pl-1 pr-3'>
               {searched === [] ? null : (
                 <ResponsiveMasonry
-                  columnsCountBreakPoints={{ 0: 1, 600: 2, 1100: 3, 1700: 4 }}
+                  columnsCountBreakPoints={{ 0: 1, 380: 2, 700: 3, 1100: 4 }}
                 >
                   <Masonry gutter='0.2rem'>
                     {searched.map((gif) => (
