@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Error from 'next/error'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { selectedGIF } from '../atoms/selectedGIF'
 import { useSession } from 'next-auth/react'

@@ -28,6 +28,14 @@ export default function LandingPage() {
     }
   }, [status])
 
+  useEffect(() => {
+    if (isLoginModal || isUploadModal) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isLoginModal, isUploadModal])
+
   const onLoginBtnClick = () => {
     if (session) return
 
@@ -52,6 +60,7 @@ export default function LandingPage() {
             width={500}
             height={200}
             alt='nyan cat'
+            priority
           />
           <h1 className='w-[40%] lg:w-full'>
             <span className='lg:text-6xl'>GIFFY </span>
@@ -67,20 +76,14 @@ export default function LandingPage() {
             className='opacity-70 object-cover group-hover:scale-125 group-hover:opacity-100 transition'
             src='/gif1.webp'
             fill
+            sizes='(max-width: 699px) 100vw,
+              (max-width: 899px) 33vw,
+              25vw'
             alt='gif1'
+            priority
+            as='image'
           />
         </div>
-        {/* <div className='h-32 overflow-hidden relative group cursor-pointer md:h-auto md:aspect-square'>
-          <span className='absolute inset-0 flex items-center justify-center text-xl font-bold z-10 text-white'>
-            좋아요 순
-          </span>
-          <Image
-            className='opacity-70 object-cover group-hover:scale-125 group-hover:opacity-100 transition'
-            src='/gif2.webp'
-            fill
-            alt='gif2'
-          />
-        </div> */}
 
         <div className='h-32 overflow-hidden relative group cursor-pointer md:h-auto md:aspect-square lg2:col-start-3 lg2:row-start-2 xl:col-start-4'>
           <span className='absolute inset-0 flex items-center justify-center text-xl font-bold z-10 text-white'>
@@ -90,7 +93,11 @@ export default function LandingPage() {
             className='opacity-70 object-cover group-hover:scale-125 group-hover:opacity-100 transition'
             src='/gif3.webp'
             fill
+            sizes='(max-width: 699px) 100vw,
+              (max-width: 899px) 33vw,
+              25vw'
             alt='gif3'
+            priority
           />
         </div>
 
@@ -154,11 +161,13 @@ export default function LandingPage() {
         </div>
       </div>
 
-      {/* 로그인, 업로드 모달창 */}
+      {/* 로그인 모달 */}
       <LoginModal
         isLoginModal={isLoginModal}
         setIsLoginModal={setIsLoginModal}
       />
+
+      {/* 업로드 모달 */}
       <UploadModal
         isUploadModal={isUploadModal}
         setIsUploadModal={setIsUploadModal}
