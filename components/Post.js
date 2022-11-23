@@ -9,7 +9,7 @@ export default function Post({ post }) {
       {/* post | gif */}
       <Image
         className={`w-full -z-20 ${
-          isLoading ? 'grayscale bg-slate-200 blur' : 'grayscale-0'
+          isLoading ? 'grayscale bg-slate-700' : 'grayscale-0'
         }`}
         src={post.gif}
         width={post.width}

@@ -14,7 +14,7 @@ export default function GifCard({ post }) {
     >
       <Image
         className={`w-full hover:scale-125 transition hover:opacity-90 cursor-pointer duration-300 hover:ring ${
-          isLoading ? 'grayscale bg-slate-200 blur' : 'grayscale-0'
+          isLoading ? 'grayscale bg-slate-700' : 'grayscale-0'
         }`}
         src={post.images.original.webp}
         width={post.images.original.width}
