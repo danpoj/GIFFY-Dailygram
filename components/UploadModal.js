@@ -1,11 +1,10 @@
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 import Image from 'next/image'
-import GifCard from './GifCard'
 import Error from 'next/error'
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { selectedGIF } from '../atoms/selectedGIF'
 import { useSession } from 'next-auth/react'
+import PostsLayout from './PostsLayout'
 
 const BASE_URL = 'https://api.giphy.com/v1/gifs/search'
 
@@ -33,6 +32,14 @@ export default function UploadModal({ isUploadModal, setIsUploadModal }) {
     throw new Error('??')
   }
 
+  const clearStates = () => {
+    setTitle('')
+    setText('')
+    setSearched([])
+    setSelected(null)
+    setIsUploadModal(false)
+  }
+
   const addPost = async (e) => {
     const res = await fetch('/api/posts', {
       method: 'POST',
@@ -49,11 +56,7 @@ export default function UploadModal({ isUploadModal, setIsUploadModal }) {
       }),
     })
 
-    setTitle('')
-    setText('')
-    setSearched([])
-    setSelected(null)
-    setIsUploadModal(false)
+    clearStates()
   }
 
   const onClick = (e) => {
@@ -144,15 +147,11 @@ export default function UploadModal({ isUploadModal, setIsUploadModal }) {
           ) : (
             <div className='w-full overflow-y-scroll pl-1 pr-3'>
               {searched === [] ? null : (
-                <ResponsiveMasonry
-                  columnsCountBreakPoints={{ 0: 2, 700: 3, 1100: 4 }}
-                >
-                  <Masonry gutter='0.2rem'>
-                    {searched.map((gif) => (
-                      <GifCard key={gif.id} gif={gif} />
-                    ))}
-                  </Masonry>
-                </ResponsiveMasonry>
+                <PostsLayout
+                  posts={searched}
+                  breakPoints={{ 0: 2, 700: 3, 1100: 4 }}
+                  isModal
+                />
               )}
             </div>
           )}

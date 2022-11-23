@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
-import Post from '../components/Post'
+import PostsLayout from '../components/PostsLayout'
 import LandingPage from '../components/LandingPage'
 import Image from 'next/image'
 
@@ -38,15 +37,10 @@ const Home = () => {
           <Image src='/nyan.gif' alt='loading' width={260} height={100} />
         </div>
       ) : (
-        <ResponsiveMasonry
-          columnsCountBreakPoints={{ 0: 1, 400: 2, 780: 3, 1000: 4, 1200: 5 }}
-        >
-          <Masonry gutter='0.3rem'>
-            {posts.map((post) => (
-              <Post key={post.id} post={post} />
-            ))}
-          </Masonry>
-        </ResponsiveMasonry>
+        <PostsLayout
+          posts={posts}
+          breakPoints={{ 0: 1, 400: 2, 780: 3, 1000: 4, 1200: 5 }}
+        />
       )}
     </div>
   )
