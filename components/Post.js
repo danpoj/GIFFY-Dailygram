@@ -1,11 +1,23 @@
 import Image from 'next/image'
 import { useState } from 'react'
+import { useSetRecoilState } from 'recoil'
+import { isPostModalState, selectedPostState } from '../atoms/selectedPost'
 
 export default function Post({ post }) {
   const [isLoading, setIsLoading] = useState(true)
+  const setSelectedPost = useSetRecoilState(selectedPostState)
+  const setIsPostModal = useSetRecoilState(isPostModalState)
+
+  const onPostClick = () => {
+    setSelectedPost(post)
+    setIsPostModal(true)
+  }
 
   return (
-    <div className='w-full mb-2 rounded border border-stone-400 overflow-hidden group hover:grayscale transition duration-100 cursor-pointer'>
+    <div
+      onClick={onPostClick}
+      className='w-full mb-2 rounded border border-stone-400 overflow-hidden group hover:grayscale transition duration-100 cursor-pointer'
+    >
       {/* post | gif */}
       <Image
         className={`w-full -z-20 ${

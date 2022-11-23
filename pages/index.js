@@ -2,9 +2,13 @@ import { useEffect, useState } from 'react'
 import PostsLayout from '../components/PostsLayout'
 import LandingPage from '../components/LandingPage'
 import Image from 'next/image'
+import PostModal from '../components/PostModal'
+import { useRecoilValue } from 'recoil'
+import { isPostModalState } from '../atoms/selectedPost'
 
 const Home = () => {
   const [posts, setPosts] = useState([])
+  const isPostModal = useRecoilValue(isPostModalState)
 
   const getPosts = async () => {
     const res = await fetch('/api/posts', {
@@ -24,6 +28,9 @@ const Home = () => {
     <div className='px-1'>
       {/* UPLOAD, LOGIN */}
       <LandingPage />
+
+      {/* POST MODAL */}
+      {isPostModal && <PostModal />}
 
       {/* HEADER */}
       <h1 className='text-4xl uppercase font-bold mt-32 mb-10 text-center text-stone-700'>
