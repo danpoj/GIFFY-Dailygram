@@ -28,6 +28,7 @@ export default function LandingPage() {
     }
   }, [status])
 
+  // 모달창 외부 scroll lock
   useEffect(() => {
     if (isLoginModal || isUploadModal) {
       document.body.style.overflow = 'hidden'

@@ -23,13 +23,15 @@ export default function UploadModal({ isUploadModal, setIsUploadModal }) {
     const res = await fetch(
       `${BASE_URL}?api_key=${process.env.NEXT_PUBLIC_GIPHY_API_KEY}&q=${e.target[0].value}`
     )
+
     if (res.ok) {
       const json = await res.json()
       setSearched(json.data)
-      setLoading(false)
+    } else {
+      throw new Error('이미지를 불러오지 못했습니다')
     }
+
     setLoading(false)
-    throw new Error('??')
   }
 
   const clearStates = () => {
