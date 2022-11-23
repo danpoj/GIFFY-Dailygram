@@ -30,10 +30,10 @@ export default function PostModal() {
             alt='post gif'
           />
         </div>
-        <div className='w-full md:w-[60%] bg-white p-3'>
+        <div className='w-full md:w-[60%] bg-white p-3 flex flex-col justify-between'>
           {/* 포스트 작성자 정보 */}
-          <div className='flex flex-col'>
-            <div className='flex gap-1 border-b border-stone-300 pb-2'>
+          <div className='flex flex-col border-b pb-3 border-slate-300'>
+            <div className='flex gap-1 border-b border-stone-300 pb-2 items-center'>
               <Image
                 className='rounded w-[28px] h-[28px]'
                 src={post.author.image}
@@ -41,17 +41,24 @@ export default function PostModal() {
                 height={28}
                 alt='post author image'
               />
-              <p>{post.author.name}</p>
+              <p className='text-sm font-bold'>{post.author.name}</p>
             </div>
 
             {/* 제목 */}
-            <p className='font-bold'>{post.title}</p>
+            <p className='font-extrabold'>{post.title}</p>
 
             {/* 내용 */}
             <p className='text-sm'>{post.text}</p>
           </div>
 
           {/* 댓글 */}
+
+          {/* 댓글 입력 input, 좋아요 button */}
+          <input
+            className='w-full h-12 border rounded border-stone-400 pl-4 text-sm'
+            placeholder='댓글'
+            type='text'
+          />
         </div>
       </div>
     </div>
