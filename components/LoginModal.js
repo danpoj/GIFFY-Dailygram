@@ -13,6 +13,7 @@ export default function LoginModal({ isLoginModal, setIsLoginModal }) {
 
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') setIsLoginModal(false)
+    console.log('hello')
   })
 
   return (

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 import Post from '../components/Post'
 import Link from 'next/link'
+import PostsLayout from '../components/PostsLayout'
 
 export default function MyPosts() {
   const [myPosts, setMyPosts] = useState([])
@@ -36,16 +37,10 @@ export default function MyPosts() {
           뒤로 가기
         </Link>
       </div>
-
-      <ResponsiveMasonry
-        columnsCountBreakPoints={{ 0: 1, 400: 2, 780: 3, 1000: 4, 1200: 5 }}
-      >
-        <Masonry gutter='0.3rem'>
-          {myPosts.map((post) => (
-            <Post key={post.id} post={post} />
-          ))}
-        </Masonry>
-      </ResponsiveMasonry>
+      <PostsLayout
+        posts={myPosts}
+        breakPoints={{ 0: 1, 400: 2, 780: 3, 1000: 4, 1200: 5 }}
+      />
     </div>
   )
 }
