@@ -10,6 +10,15 @@ const Home = () => {
   const [posts, setPosts] = useState([])
   const isPostModal = useRecoilValue(isPostModalState)
 
+  // 모달창 외부 scroll lock
+  useEffect(() => {
+    if (isPostModal) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isPostModal])
+
   const getPosts = async () => {
     const res = await fetch('/api/posts', {
       method: 'GET',
