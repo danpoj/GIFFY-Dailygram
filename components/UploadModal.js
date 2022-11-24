@@ -42,7 +42,7 @@ export default function UploadModal({ isUploadModal, setIsUploadModal }) {
     setIsUploadModal(false)
   }
 
-  const addPost = async (e) => {
+  const addPost = async () => {
     const res = await fetch('/api/posts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

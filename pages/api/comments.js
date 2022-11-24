@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-export default async function posts(req, res) {
+export default async function comments(req, res) {
   const body = req.body
   if (req.method === 'POST') {
     const author = await prisma.user.findUnique({
@@ -11,42 +11,30 @@ export default async function posts(req, res) {
       },
     })
 
-    const post = await prisma.post.create({
+    const comment = await prisma.comment.create({
       data: {
-        title: body.title,
         text: body.text,
         authorId: author.id,
-        gif: body.gifData.src,
-        width: body.gifData.width,
-        height: body.gifData.height,
+        postId: body.postId,
       },
     })
 
-    res.json(post)
+    res.json(comment)
   }
 
   if (req.method === 'GET') {
-    const posts = await prisma.post.findMany({
-      orderBy: {
-        createdAt: 'desc',
-      },
-
+    const comments = await prisma.comment.findMany({
+      where: {},
       include: {
         author: {
           select: {
             name: true,
-            email: true,
             image: true,
-          },
-        },
-        Comment: {
-          include: {
-            author: true,
           },
         },
       },
     })
 
-    res.json(posts)
+    res.json(comments)
   }
 }
