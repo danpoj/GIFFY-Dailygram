@@ -62,8 +62,8 @@ export default function PostModal() {
       id='post-modal'
       className='fixed left-0 right-0 top-0 bottom-0 flex items-center justify-center z-50 bg-stone-900 bg-opacity-50'
     >
-      <div className='flex flex-col h-[80%] md:flex-row w-[86%] md:w-[70%] md:h-[70%]  rounded justify-center'>
-        <div className='w-full max-h-[30%] md:max-h-max md:w-[40%] bg-black rounded-t-lg     md:rounded-tl-none md:rounded-l-lg '>
+      <div className='flex flex-col h-[80%] md:flex-row w-[86%] md:w-[70%] md:h-[70%]   justify-center'>
+        <div className='w-full max-h-[30%] md:max-h-max md:w-[40%] bg-black '>
           <Image
             className='object-contain w-full h-full'
             src={post.gif}
@@ -72,31 +72,35 @@ export default function PostModal() {
             alt='post gif'
           />
         </div>
-        <div className='w-full md:w-[60%] bg-white px-2 pt-3 flex flex-col relative rounded-b-lg md:rounded-r-lg'>
+        <div className='w-full md:w-[60%] bg-white px-2 pt-3 flex flex-col relative'>
           {/* 포스트 작성자 정보 */}
           <div className='flex flex-col mb-2 border-b border-black pb-4'>
             <div className='flex gap-1  pb-2 items-center'>
               <Image
-                className='rounded w-[28px] h-[28px]'
+                className='rounded w-[28px] h-[28px] ring-[2px] ring-fuchsia-500 ring-offset-1 mr-1'
                 src={post.author.image}
                 width={28}
                 height={28}
                 alt='post author image'
               />
-              <p className='text-xs font-bold'>{post.author.name} |</p>
+              <p className='text-xs font-bold truncate max-w-[140px]'>
+                {post.author.name} |
+              </p>
               <p className='font-extrabold'>{post.title}</p>
             </div>
 
             {/* 내용 */}
             <div className='flex items-center gap-1'>
               <Image
-                className='rounded w-[28px] h-[28px]'
+                className='rounded w-[28px] h-[28px] ring-[2px] ring-fuchsia-500 ring-offset-1 mr-1'
                 src={post.author.image}
                 width={28}
                 height={28}
                 alt='post author image'
               />
-              <p className='text-xs font-bold'>{post.author.name} |</p>
+              <p className='text-xs font-bold truncate max-w-[140px]'>
+                {post.author.name} |
+              </p>
               <p className='text-sm'>{post.text}</p>
             </div>
           </div>
@@ -112,7 +116,7 @@ export default function PostModal() {
                   width={24}
                   height={24}
                 />
-                <p className='font-bold text-xs max-w-[200px] truncate'>
+                <p className='font-bold text-xs max-w-[140px] truncate'>
                   {comment.author.name}
                 </p>
                 <p className='text-sm'>{comment.text}</p>

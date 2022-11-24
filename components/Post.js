@@ -47,7 +47,7 @@ export default function Post({ post }) {
               height={30}
               alt='author image'
             />
-            <p className='text-[.7rem] leading-3 font-bold'>
+            <p className='text-[.7rem] leading-3 font-bold truncate max-w-[120px]'>
               {post.author.name}
             </p>
           </div>
