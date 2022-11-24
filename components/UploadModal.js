@@ -96,7 +96,7 @@ export default function UploadModal({ isUploadModal, setIsUploadModal }) {
           >
             <input
               onChange={(e) => setTitle(e.target.value)}
-              className='pl-3 h-12'
+              className='pl-3 h-12 outline-none'
               type='text'
               placeholder='제목'
               value={title}
@@ -104,7 +104,7 @@ export default function UploadModal({ isUploadModal, setIsUploadModal }) {
             <textarea
               onChange={(e) => setText(e.target.value)}
               value={text}
-              className='pl-3 text-base pt-2 h-20'
+              className='pl-3 text-base pt-2 h-20 outline-none'
               type='textarea'
               placeholder='내용'
             />
@@ -119,7 +119,7 @@ export default function UploadModal({ isUploadModal, setIsUploadModal }) {
             {/* search input */}
             <form onSubmit={onSubmit} className='flex'>
               <input
-                className='h-12 w-full md:w-52 lg:w-60 rounded-l-xl border border-r-0 border-stone-400 pl-4 text-lg font-bold'
+                className='h-12 w-full md:w-52 lg:w-60 rounded-l-xl border border-r-0 border-stone-400 pl-4 text-lg font-bold outline-none'
                 placeholder='지브리...'
                 type='text'
               />
